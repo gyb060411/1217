@@ -16,8 +16,9 @@ abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity i
             persenter=getPersenter();
             persenter.attachView(this);
         }
-        initData();
         initView();
+        initData();
+
     }
 
     protected abstract int getLayouID();

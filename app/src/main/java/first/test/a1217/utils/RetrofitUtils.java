@@ -1,5 +1,11 @@
 package first.test.a1217.utils;
 
+import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -48,19 +54,28 @@ class RetrofitUtils implements INetWorkInterface{
 
                     @Override
                     public void onNext(@NonNull ResponseBody responseBody) {
-                        String string = responseBody.string();
-                        callBack.getClass()
+                        try {
+                            String string = responseBody.string();
+                            Type[] genericInterfaces = callBack.getClass().getGenericInterfaces();
+                            Type[] actualTypeArguments = ((ParameterizedType) genericInterfaces[0]).getActualTypeArguments();
+                            Type type = actualTypeArguments[0];
+                            T json = new Gson().fromJson(string, type);
+                            callBack.onSuccess(json);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        callBack.onFail("网络异常："+e.toString());
                     }
 
                     @Override
                     public void onComplete() {
 
                     }
-                })
+                });
     }
 }
