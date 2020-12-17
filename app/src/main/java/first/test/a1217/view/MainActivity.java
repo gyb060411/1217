@@ -30,7 +30,8 @@ public class MainActivity extends BaseActivity<SchoolPresenterImp> implements Sc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        initView();
+        initData();
     }
 
     @Override

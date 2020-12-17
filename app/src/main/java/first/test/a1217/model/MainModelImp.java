@@ -8,8 +8,9 @@ import first.test.a1217.utils.RetrofitUtils;
 public
 class MainModelImp implements SchoolContract.MainModel {
     private SchoolContract.MainPersenter persenter;
-    public MainModelImp(SchoolPresenterImp persenter) {
-        this.persenter= persenter;
+
+    public MainModelImp(SchoolContract.MainPersenter persenter) {
+        this.persenter = persenter;
     }
 
     @Override

@@ -10,7 +10,7 @@ import first.test.a1217.utils.URLConstart;
 public
 class SchoolPresenterImp extends BasePresenter<SchoolContract.MainView> implements SchoolContract.MainPersenter {
     private SchoolContract.MainView mainView;
- private SchoolContract.MainModel mainModel;
+    private SchoolContract.MainModel mainModel;
 
     public SchoolPresenterImp(SchoolContract.MainView mainView) {
         this.mainView = mainView;
@@ -22,12 +22,12 @@ class SchoolPresenterImp extends BasePresenter<SchoolContract.MainView> implemen
         mainModel.getModel(URLConstart.School, new InetCallBack<SchoolBean>() {
             @Override
             public void onSuccess(SchoolBean schoolBean) {
-                mainView.getSchool(schoolBean);
+                iView.getSchool(schoolBean);
             }
 
             @Override
             public void onFail(String err) {
-                mainView.onError(err);
+                iView.onError(err);
             }
         });
     }
